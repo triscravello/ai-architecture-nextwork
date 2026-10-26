@@ -24,3 +24,10 @@ async def ask(request: QuestionRequest):
     # Delegate the work to the orchestrator layer
     answer = await orchestrator.answer_question(request.question)
     return AnswerResponse(answer=answer)
+
+
+# Route architecture questions through the orchestrator.
+@app.post("/ask-architecture", response_model=AnswerResponse)
+async def ask_architecture(request: QuestionRequest):
+    answer = await orchestrator.answer_architecture_question(request.question)
+    return AnswerResponse(answer=answer)
